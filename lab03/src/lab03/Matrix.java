@@ -52,10 +52,13 @@ public class Matrix {
 				m1size = Integer.parseInt(val[0]);
 				m2size = Integer.parseInt(val[1]);
 				mResult = Integer.parseInt(val[2]);
+                m1C = m1size;
+                m2R = mResult;
+                m1Rm2C = m2size;
 				// criando as matrizes
-				matrix1 = new double[m1size][m1size + 2];
-				matrix2 = new double[m2size][m2size + 2];
-				result = new double[mResult][mResult + 2];
+				matrix1 = new double[m1C][m1Rm2C];
+				matrix2 = new double[m1Rm2C][m2R];
+				result = new double[m1C][m2R];
 
 			}
 			count++;
@@ -69,7 +72,7 @@ public class Matrix {
 
 				}
 				linham1++;
-				// colocando os numeros na matriz 2
+			// colocando os numeros na matriz 2
 			} else if (count > (m1size + 3)) {
 
 				for (int i = 0; i < val.length; i++) {
@@ -80,6 +83,12 @@ public class Matrix {
 				linham2++;
 
 			}
+            // initializing the result matrix
+            for (int i = 0; i < m1C; i++){
+                for (int j = 0; j < m2R; j++){
+                    result[i][j] =  0;
+                }
+            }
 		}
 
 	}
@@ -100,7 +109,7 @@ public class Matrix {
 		String mresult = "";
 		for (int i = 0; i < result.length; i++) {
 
-			for (int j = 0; j < result[i].length - 1; j++) {
+			for (int j = 0; j < result[i].length; j++) {
 
 				mresult += result[i][j] + " ";
 
@@ -113,7 +122,7 @@ public class Matrix {
 
 	public static void main(String[] args) throws Exception {
 
-		Matrix max = new Matrix("matrix.txt ");
+		Matrix max = new Matrix("matrix.txt");
 
 		max.buildMatriX();
 		max.multiply();
