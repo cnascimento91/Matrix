@@ -2,6 +2,8 @@ package lab03;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+
+
 import java.util.Scanner;
 
 public class Matrix {
@@ -26,9 +28,7 @@ public class Matrix {
 		return fileName;
 	}
 
-	public void setFilePath(String fileName2) throws Exception {
-		if (fileName == null)
-			throw new Exception("Is necessary has a file name or path");
+	public void setFilePath(String fileName2) {
 		this.fileName = fileName2;
 	}
 
@@ -84,11 +84,11 @@ public class Matrix {
 
 			}
             // initializing the result matrix
-           /* for (int i = 0; i < m1C; i++){
+            for (int i = 0; i < m1C; i++){
                 for (int j = 0; j < m2R; j++){
                     result[i][j] =  0;
                 }
-            }*/
+            }
 		}
 
 	}
