@@ -8,6 +8,9 @@ import java.util.Scanner;
 
 public class Matrix {
 	private String fileName;
+    private int m1C;
+    private int m2R;
+    private int m1Rm2C;
 	private double[][] result;
 	private double[][] matrix1;
 	private double[][] matrix2;
@@ -82,7 +85,13 @@ public class Matrix {
 	}
 
 	public void multiply() {
-
+        for (int i = 0; i < m1C; i++){
+            for (int j = 0; j < m2R; j++){
+                for (int l = 0; l < m1Rm2C; l++){
+                   result[i][j] +=  matrix1[i][l] * matrix2[l][j];
+                }
+            }
+        }
 	}
 
 	@Override
