@@ -12,11 +12,7 @@ public class Matrix {
 	private double[][] result;
 	private double[][] matrix1;
 	private double[][] matrix2;
-/**
- * 
- * @param fileName
- * @throws Exception
- */
+
 	public Matrix(String fileName) throws Exception {
 
 		if (fileName == null)
@@ -25,18 +21,11 @@ public class Matrix {
 		this.fileName = fileName;
 
 	}
-/**
- * 
- * @return
- */
+
 	public String getFilePath() {
 		return fileName;
 	}
-/**
- * 
- * @param fileName2
- * @throws Exception
- */
+
 	public void setFilePath(String fileName2) throws Exception {
 		if (fileName == null)
 			throw new Exception("Is necessary has a file name or path");
