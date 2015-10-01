@@ -1,7 +1,5 @@
 package lab03;
-/**
- * Ana Godoy and Cesar Augusto Ribeiro do Nascimento
- */
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,7 +9,7 @@ public class Matrix
 {
     private String fileName;
     private int m1R; // number of rows of matrix 1
-    private int m2C; // number of columns of matrix 2
+    private int m2C; // number of colums of matrix 2
     private int m1Cm2R; // number of columns of matrix 1 and rows of matrix 2
     private double[][] result; // matrix result
     private double[][] matrix1; // matrix 1
