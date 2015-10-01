@@ -61,7 +61,7 @@ public class Matrix
      *
      * @throws FileNotFoundException
      */
-    public void buildMatriX() throws FileNotFoundException
+    public void buildMatriX() throws FileNotFoundException, Exception
     {
 
         Scanner in = new Scanner(new File(fileName));
@@ -79,13 +79,16 @@ public class Matrix
             if ( count == 0 )
             {
                 setDimention(num);
-
             }
             count++;
             val = num.split(" ");
             // filling out the matrix 1 by file
             if ( count < ( m1R + 3 ) && ( count >= 3 ) )
             {
+                if ( val.length !=  m1Cm2R)
+                {
+                    throw new Exception("The matrix is not compatible with the dimensions");
+                }
 
                 for ( int i = 0; i < val.length; i++ )
                 {
@@ -98,6 +101,10 @@ public class Matrix
             }
             else if ( count > ( m1R + 3 ) )
             {
+                if ( val.length !=  m2C)
+                {
+                    throw new Exception("The matrix is not compatible with the dimensions");
+                }
 
                 for ( int i = 0; i < val.length; i++ )
                 {
@@ -108,7 +115,16 @@ public class Matrix
                 row2++;
 
             }
+        }
 
+        if ( row1 !=  m1R)
+        {
+            throw new Exception("The matrix is not compatible with the dimensions");
+        }
+
+        if ( row2 !=  m1Cm2R)
+        {
+            throw new Exception("The matrix is not compatible with the dimensions");
         }
 
     }
