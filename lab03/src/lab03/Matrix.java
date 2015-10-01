@@ -1,141 +1,190 @@
 package lab03;
 
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class Matrix {
-	private String fileName;
-    private int m1C;
-    private int m2R;
-    private int m1Rm2C;
-	private double[][] result;
-	private double[][] matrix1;
-	private double[][] matrix2;
-/**
- * 
- * @param fileName
- * @throws Exception
- */
-	public Matrix(String fileName) throws Exception {
+public class Matrix
+{
+    private String fileName;
+    private int m1R; // number of rows of matrix 1
+    private int m2C; // number of colums of matrix 2
+    private int m1Cm2R; // number of columns of matrix 1 and rows of matrix 2
+    private double[][] result; // matrix result
+    private double[][] matrix1; // matrix 1
+    private double[][] matrix2; // matrix 2
 
-		if (fileName == null)
-			throw new Exception("Is necessary has a file name or path");
+    /**
+     *
+     * @param fileName name of the file which the matrixes will be read
+     * @throws Exception
+     */
+    public Matrix( String fileName ) throws Exception
+    {
 
-		this.fileName = fileName;
+        if ( fileName == null )
+        {
+            throw new Exception("Is necessary has a file name or path");
+        }
 
-	}
-/**
- * 
- * @return
- */
-	public String getFilePath() {
-		return fileName;
-	}
-/**
- * 
- * @param fileName2
- * @throws Exception
- */
-	public void setFilePath(String fileName2) throws Exception {
-		if (fileName == null)
-			throw new Exception("Is necessary has a file name or path");
-		this.fileName = fileName2;
-	}
+        this.fileName = fileName;
 
-	public void buildMatriX() throws FileNotFoundException {
+    }
 
-		Scanner in = new Scanner(new File(fileName));
-		String num = null;
-		String[] val = null;
-		int count = 0, linham1 = 0, linham2 = 0;
+    /**
+     *
+     * @return
+     */
+    public String getFilePath()
+    {
+        return fileName;
+    }
 
-		// abrindo o arquivo linha por linha
-		while (in.hasNext()) {
-			num = new String(in.nextLine());
-			num = num.replace(",", "");
+    /**
+     *
+     * @param fileName2 name of the file which the matrixes will be read
+     * @throws Exception
+     */
+    public void setFilePath( String fileName2 ) throws Exception
+    {
+        if ( fileName == null )
+        {
+            throw new Exception("Is necessary has a file name or path");
+        }
+        this.fileName = fileName2;
+    }
 
-			// criando as matrizes para serem preenchidas
-			if (count == 0) {
-				setDimention(num);
+    /**
+     *
+     * @throws FileNotFoundException
+     */
+    public void buildMatriX() throws FileNotFoundException
+    {
 
-			}
-			count++;
-			val = num.split(" ");
-			// colocando os numeros na matriz 1
-			if (count < (m1C + 3) && (count >= 3)) {
+        Scanner in = new Scanner(new File(fileName));
+        String num = null;
+        String[] val = null;
+        int count = 0, row1 = 0, row2 = 0;
 
-				for (int i = 0; i < val.length; i++) {
+        // reading the file line per line
+        while ( in.hasNext() )
+        {
+            num = new String(in.nextLine());
+            num = num.replace(",", "");
 
-					matrix1[linham1][i] = Double.parseDouble(val[i]);
+            // initializing the matrixes to be filled
+            if ( count == 0 )
+            {
+                setDimention(num);
 
-				}
-				linham1++;
-			// colocando os numeros na matriz 2
-			} else if (count > (m1C + 3)) {
+            }
+            count++;
+            val = num.split(" ");
+            // filling out the matrix 1 by file
+            if ( count < ( m1R + 3 ) && ( count >= 3 ) )
+            {
 
-				for (int i = 0; i < val.length; i++) {
+                for ( int i = 0; i < val.length; i++ )
+                {
 
-					matrix2[linham2][i] = Double.parseDouble(val[i]);
+                    matrix1[row1][i] = Double.parseDouble(val[i]);
 
-				}
-				linham2++;
+                }
+                row1++;
+                // filling out the matrix 2 by file
+            }
+            else if ( count > ( m1R + 3 ) )
+            {
 
-			}
-           
-		}
+                for ( int i = 0; i < val.length; i++ )
+                {
 
-	}
+                    matrix2[row2][i] = Double.parseDouble(val[i]);
 
-	private void setDimention(String num) {
-		String[] val;
-		val = num.split(" ");
-		// resgatando os tamanhos
-		m1C = Integer.parseInt(val[0]);
-		m1Rm2C = Integer.parseInt(val[1]);
-		m2R = Integer.parseInt(val[2]);
-		
-		// criando as matrizes
-		matrix1 = new double[m1C][m1Rm2C];
-		matrix2 = new double[m1Rm2C][m2R];
-		result = new double[m1C][m2R];
-	}
+                }
+                row2++;
 
-	public void multiply() {
-        for (int i = 0; i < m1C; i++){
-            for (int j = 0; j < m2R; j++){
-                for (int l = 0; l < m1Rm2C; l++){
-                   result[i][j] +=  matrix1[i][l] * matrix2[l][j];
+            }
+
+        }
+
+    }
+
+    /**
+     *
+     * @param num string which store the values of the matrixes dimensions
+     */
+    private void setDimention( String num )
+    {
+        String[] val;
+        val = num.split(" ");
+        // getting the matrixes dimmensions
+        m1R = Integer.parseInt(val[0]);
+        m1Cm2R = Integer.parseInt(val[1]);
+        m2C = Integer.parseInt(val[2]);
+
+        // initializing the matrixes
+        matrix1 = new double[m1R][m1Cm2R];
+        matrix2 = new double[m1Cm2R][m2C];
+        result = new double[m1R][m2C];
+    }
+
+    /**
+     *
+     */
+    public void multiply()
+    {
+        for ( int i = 0; i < m1R; i++ )
+        {
+            for ( int j = 0; j < m2C; j++ )
+            {
+                for ( int l = 0; l < m1Cm2R; l++ )
+                {
+                    result[i][j] += matrix1[i][l] * matrix2[l][j];
                 }
             }
         }
-	}
+    }
 
-	@Override
-	public String toString() {
-		// output da matrix final
-		String mresult = "";
-		for (int i = 0; i < result.length; i++) {
+    /**
+     *
+     * @return
+     */
+    @Override
+    public String toString()
+    {
+        // printing the final matrix
+        String mresult = "";
+        for ( int i = 0; i < result.length; i++ )
+        {
 
-			for (int j = 0; j < result[i].length; j++) {
+            for ( int j = 0; j < result[i].length; j++ )
+            {
 
-				mresult += result[i][j] + " ";
+                mresult += result[i][j] + " ";
 
-			}
-			mresult += "\n";
-		}
-		return mresult;
+            }
+            mresult += "\n";
+        }
+        return mresult;
 
-	}
+    }
 
-	public static void main(String[] args) throws Exception {
+    /**
+     *
+     * @param args
+     * @throws Exception
+     */
+    public static void main( String[] args ) throws Exception
+    {
 
-		Matrix max = new Matrix("matrix.txt");
+        Matrix max = new Matrix("matrix.txt");
 
-		max.buildMatriX();
-		max.multiply();
-		System.out.println(max.toString());
+        max.buildMatriX();
+        max.multiply();
+        System.out.println(max.toString());
 
-	}
+    }
 
 }
